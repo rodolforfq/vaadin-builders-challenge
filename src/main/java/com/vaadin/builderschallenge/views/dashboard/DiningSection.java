@@ -2,7 +2,8 @@ package com.vaadin.builderschallenge.views.dashboard;
 
 import com.vaadin.builderschallenge.services.DashboardService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.ChartType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,20 +16,32 @@ public class DiningSection extends Section {
         var diningMetrics = dashboardService.fetchDiningMetrics();
         LOG.info("DiningMetrics: {}", diningMetrics);
 
-        addTile("Dining", createDiningWidget());
-        addTile("Preferences", createPreferencesWidget());
-        addTile("Restrictions", createRestrictionsWidget());
+        addTile(createDiningWidget());
+        addTile(createPreferencesWidget());
+        addTile(createRestrictionsWidget());
     }
 
-    private static Component createDiningWidget() {
-        return new Text("A dial showing the number of meals reserved vs. number possible");
+    private Component createDiningWidget() {
+        var chart = new Chart(ChartType.GAUGE);
+        chart.getConfiguration().setTitle("Dining");
+        chart.getConfiguration().setSubTitle("The number of meals reserved vs. number possible");
+
+        return chart;
     }
 
-    private static Component createPreferencesWidget() {
-        return new Text("A dial showing the number of diners with food preferences vs. total diners");
+    private Component createPreferencesWidget() {
+        var chart = new Chart(ChartType.GAUGE);
+        chart.getConfiguration().setTitle("Preferences");
+        chart.getConfiguration().setSubTitle("The number of diners with food preferences vs. total diners");
+
+        return chart;
     }
 
-    private static Component createRestrictionsWidget() {
-        return new Text("A dial showing the number of diners with food restrictions vs. total diners");
+    private Component createRestrictionsWidget() {
+        var chart = new Chart(ChartType.GAUGE);
+        chart.getConfiguration().setTitle("Restrictions");
+        chart.getConfiguration().setSubTitle("The number of diners with food restrictions vs. total diners");
+
+        return chart;
     }
 }

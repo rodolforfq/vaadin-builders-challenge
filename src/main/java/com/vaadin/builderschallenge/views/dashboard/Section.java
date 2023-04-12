@@ -35,4 +35,10 @@ public class Section extends Composite<VerticalLayout> {
         tileLayout.add(tile);
         return tile;
     }
+
+    public Tile addTile(Component widget) {
+        var tile = new Tile(widget);
+        tileLayout.add(tile);
+        return tile;
+    }
 }

@@ -18,7 +18,7 @@ public class ScheduleSection extends Section {
         addTile("Events", createEventsWidget());
     }
 
-    private static Component createEventsWidget() {
+    private Component createEventsWidget() {
         return new Text("A single number showing the number of scheduled calendar events");
     }
 }

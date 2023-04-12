@@ -18,7 +18,7 @@ public class LodgingSection extends Section {
         addTile("Occupancy", createOccupancyWidget());
     }
 
-    private static Component createOccupancyWidget() {
+    private Component createOccupancyWidget() {
         return new Text("A set of dials showing number of room-nights reserved vs. blocked by night");
     }
 }

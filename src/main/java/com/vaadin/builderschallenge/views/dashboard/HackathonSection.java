@@ -20,15 +20,15 @@ public class HackathonSection extends Section {
         addTile("Registrants", createRegistrantsWidget());
     }
 
-    private static Component createIdeasWidget() {
+    private Component createIdeasWidget() {
         return new Text("A single number showing the number of hackathon ideas");
     }
 
-    private static Component createPopularityWidget() {
+    private Component createPopularityWidget() {
         return new Text("A single number showing the number of hackathon upvotes");
     }
 
-    private static Component createRegistrantsWidget() {
+    private Component createRegistrantsWidget() {
         return new Text("A single number showing the number of hackathon registrants");
     }
 }

@@ -2,7 +2,8 @@ package com.vaadin.builderschallenge.views.dashboard;
 
 import com.vaadin.builderschallenge.services.DashboardService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.ChartType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,15 +16,23 @@ public class TownHallSection extends Section {
         var townHallMetrics = dashboardService.fetchTownHallMetrics();
         LOG.info("TownHallMetrics: {}", townHallMetrics);
 
-        addTile("Questions", createQuestionsWidget());
-        addTile("Popularity", createPopularityWidget());
+        addTile(createQuestionsWidget());
+        addTile(createPopularityWidget());
     }
 
-    private static Component createQuestionsWidget() {
-        return new Text("A pie chart showing the number of grouped questions by topic");
+    private Component createQuestionsWidget() {
+        var chart = new Chart(ChartType.PIE);
+        chart.getConfiguration().setTitle("Questions");
+        chart.getConfiguration().setSubTitle("The number of grouped questions by topic");
+
+        return chart;
     }
 
-    private static Component createPopularityWidget() {
-        return new Text("A pie chart showing the number of votes per grouped question by topic");
+    private Component createPopularityWidget() {
+        var chart = new Chart(ChartType.PIE);
+        chart.getConfiguration().setTitle("Popularity");
+        chart.getConfiguration().setSubTitle("The number of votes per grouped question by topic");
+
+        return chart;
     }
 }
