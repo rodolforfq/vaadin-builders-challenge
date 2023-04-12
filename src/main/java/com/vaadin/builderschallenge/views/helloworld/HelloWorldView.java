@@ -14,18 +14,17 @@ import com.vaadin.flow.router.Route;
 public class HelloWorldView extends HorizontalLayout {
 
     private final TextField name;
-    private final Button sayHello;
 
     public HelloWorldView() {
         name = new TextField("Your name");
-        sayHello = new Button("Say hello");
+
+        var sayHello = new Button("Say hello");
         sayHello.addClickListener(e -> Notification.show("Hello " + name.getValue()));
         sayHello.addClickShortcut(Key.ENTER);
 
         setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
-
         add(name, sayHello);
+        setVerticalComponentAlignment(Alignment.END, name, sayHello);
     }
 
 }

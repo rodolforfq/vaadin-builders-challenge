@@ -47,9 +47,6 @@ public class DashboardView extends Scroller {
     }
 
     private Component createSection(String title, Component... tiles) {
-        var message = dashboardService.sayHello();
-        LOG.info("Hello from {}: {}", title, message);
-
         var titleBar = new H1(title);
 
         var tileLayout = new FormLayout();
@@ -78,6 +75,9 @@ public class DashboardView extends Scroller {
     }
 
     private Component createRegistrationSection() {
+        var registrationMetrics = dashboardService.fetchRegistrationMetrics();
+        LOG.info("RegistrationMetrics: {}", registrationMetrics);
+
         var registrationTile = createTile("Registration", new Text("A dial showing number of employees registered vs. total in company"));
         var participationTile = createTile("Participation", new Text("A dial showing number of employee-days registered vs. number of employee-days possible (try to show party part of dial in a different color—or even each day's sum as a different color)"));
 
@@ -85,12 +85,18 @@ public class DashboardView extends Scroller {
     }
 
     private Component createLodgingSection() {
+        var lodgingMetrics = dashboardService.fetchLodgingMetrics();
+        LOG.info("LodgingMetrics: {}", lodgingMetrics);
+
         var occupancyTile = createTile("Occupancy", new Text("A set of dials showing number of room-nights reserved vs. blocked by night"));
 
         return createSection("Lodging", occupancyTile);
     }
 
     private Component createDiningSection() {
+        var diningMetrics = dashboardService.fetchDiningMetrics();
+        LOG.info("DiningMetrics: {}", diningMetrics);
+
         var diningTile = createTile("Dining", new Text("A dial showing the number of meals reserved vs. number possible"));
         var preferencesTile = createTile("Preferences", new Text("A dial showing the number of diners with food preferences vs. total diners"));
         var restrictionsTile = createTile("Restrictions", new Text("A dial showing the number of diners with food restrictions vs. total diners"));
@@ -99,6 +105,9 @@ public class DashboardView extends Scroller {
     }
 
     private Component createTownHallSection() {
+        var townHallMetrics = dashboardService.fetchTownHallMetrics();
+        LOG.info("TownHallMetrics: {}", townHallMetrics);
+
         var questionsTile = createTile("Questions", new Text("A pie chart showing the number of grouped questions by topic"));
         var popularityTile = createTile("Popularity", new Text("A pie chart showing the number of votes per grouped question by topic"));
 
@@ -106,6 +115,9 @@ public class DashboardView extends Scroller {
     }
 
     private Component createHackathonSection() {
+        var hackathonMetrics = dashboardService.fetchHackathonMetrics();
+        LOG.info("HackathonMetrics: {}", hackathonMetrics);
+
         var ideasTile = createTile("Ideas", new Text("A single number showing the number of hackathon ideas"));
         var popularityTile = createTile("Popularity", new Text("A single number showing the number of hackathon upvotes"));
         var registrantsTile = createTile("Registrants", new Text("A single number showing the number of hackathon registrants"));
@@ -114,6 +126,9 @@ public class DashboardView extends Scroller {
     }
 
     private Component createScheduleSection() {
+        var scheduleMetrics = dashboardService.fetchScheduleMetrics();
+        LOG.info("ScheduleMetrics: {}", scheduleMetrics);
+
         var eventsTile = createTile("Events", new Text("A single number showing the number of scheduled calendar events"));
 
         return createSection("Schedule", eventsTile);
