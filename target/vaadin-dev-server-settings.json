@@ -1,0 +1,18 @@
+{
+  "frontendFolder": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/./frontend/generated/jar-resources",
+  "staticOutput": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/target/classes/META-INF/VAADIN/config",
+  "frontendBundleOutput": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/target/classes/META-INF/VAADIN/webapp",
+  "devBundleOutput": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/src/main/dev-bundle/webapp",
+  "devBundleStatsOutput": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/src/main/dev-bundle/config",
+  "jarResourcesFolder": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/./frontend/generated/jar-resources",
+  "generatedFlowImportsFolder": "target/frontend",
+  "themeName": "builderschallenge",
+  "clientServiceWorkerSource": "/Users/joel/workspaces/vaadin/vaadin-builders-challenge/target/sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
