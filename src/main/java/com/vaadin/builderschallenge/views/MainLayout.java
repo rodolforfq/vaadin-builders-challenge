@@ -4,6 +4,7 @@ package com.vaadin.builderschallenge.views;
 import com.vaadin.builderschallenge.components.appnav.AppNav;
 import com.vaadin.builderschallenge.components.appnav.AppNavItem;
 import com.vaadin.builderschallenge.views.about.AboutView;
+import com.vaadin.builderschallenge.views.dashboard.DashboardView;
 import com.vaadin.builderschallenge.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -54,6 +55,7 @@ public class MainLayout extends AppLayout {
         // For documentation, visit https://github.com/vaadin/vcf-nav#readme
         AppNav nav = new AppNav();
 
+        nav.addItem(new AppNavItem("Dashboard", DashboardView.class, LineAwesomeIcon.CHART_PIE_SOLID.create()));
         nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
         nav.addItem(new AppNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
 
@@ -61,9 +63,7 @@ public class MainLayout extends AppLayout {
     }
 
     private Footer createFooter() {
-        Footer layout = new Footer();
-
-        return layout;
+        return new Footer();
     }
 
     @Override
