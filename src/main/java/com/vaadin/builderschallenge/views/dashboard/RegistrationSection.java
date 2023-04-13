@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class RegistrationSection extends Section {
     private static final Logger LOG = LoggerFactory.getLogger(RegistrationSection.class);
+
     private final transient RegistrationMetrics registrationMetrics;
 
     public RegistrationSection(DashboardService dashboardService) {

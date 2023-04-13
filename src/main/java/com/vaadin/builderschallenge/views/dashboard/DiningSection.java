@@ -1,6 +1,7 @@
 package com.vaadin.builderschallenge.views.dashboard;
 
 import com.vaadin.builderschallenge.services.DashboardService;
+import com.vaadin.builderschallenge.uimodel.DiningMetrics;
 import com.vaadin.flow.component.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +9,12 @@ import org.slf4j.LoggerFactory;
 public class DiningSection extends Section {
     private static final Logger LOG = LoggerFactory.getLogger(DiningSection.class);
 
+    private final transient DiningMetrics diningMetrics;
+
     public DiningSection(DashboardService dashboardService) {
         super("Dining");
 
-        var diningMetrics = dashboardService.fetchDiningMetrics();
+        diningMetrics = dashboardService.fetchDiningMetrics();
         LOG.info("DiningMetrics: {}", diningMetrics);
 
         addTile(createDiningWidget());
