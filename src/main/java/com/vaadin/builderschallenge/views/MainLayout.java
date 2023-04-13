@@ -1,11 +1,12 @@
 package com.vaadin.builderschallenge.views;
 
 
+import org.vaadin.lineawesome.LineAwesomeIcon;
+
 import com.vaadin.builderschallenge.components.appnav.AppNav;
 import com.vaadin.builderschallenge.components.appnav.AppNavItem;
 import com.vaadin.builderschallenge.views.about.AboutView;
 import com.vaadin.builderschallenge.views.dashboard.DashboardView;
-import com.vaadin.builderschallenge.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Footer;
@@ -15,7 +16,6 @@ import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-import org.vaadin.lineawesome.LineAwesomeIcon;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -56,7 +56,6 @@ public class MainLayout extends AppLayout {
         AppNav nav = new AppNav();
 
         nav.addItem(new AppNavItem("Dashboard", DashboardView.class, LineAwesomeIcon.CHART_PIE_SOLID.create()));
-        nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
         nav.addItem(new AppNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
 
         return nav;

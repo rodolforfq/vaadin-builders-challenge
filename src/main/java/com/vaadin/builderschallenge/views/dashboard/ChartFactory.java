@@ -1,9 +1,22 @@
 package com.vaadin.builderschallenge.views.dashboard;
 
-import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.charts.model.*;
-
 import java.util.Arrays;
+import java.util.Collection;
+
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.AxisTitle;
+import com.vaadin.flow.component.charts.model.Background;
+import com.vaadin.flow.component.charts.model.BackgroundShape;
+import com.vaadin.flow.component.charts.model.ChartType;
+import com.vaadin.flow.component.charts.model.DataLabels;
+import com.vaadin.flow.component.charts.model.ListSeries;
+import com.vaadin.flow.component.charts.model.PlotOptionsColumn;
+import com.vaadin.flow.component.charts.model.PlotOptionsSolidgauge;
+import com.vaadin.flow.component.charts.model.Stacking;
+import com.vaadin.flow.component.charts.model.Tooltip;
+import com.vaadin.flow.component.charts.model.XAxis;
+import com.vaadin.flow.component.charts.model.YAxis;
+import com.vaadin.flow.component.charts.model.style.SolidColor;
 
 public final class ChartFactory {
 
@@ -71,4 +84,34 @@ public final class ChartFactory {
 
         return chart;
     }
+
+    public static Chart createStackedPercentageColumn(String title, String subtitle, String xAxisLabel, String yAxisLabel,
+                                                      Collection<String> xAxisCategories) {
+        var chart = new Chart(ChartType.COLUMN);
+
+        var chartConfiguration = chart.getConfiguration();
+        chartConfiguration.setTitle(title);
+        chartConfiguration.setSubTitle(subtitle);
+
+        var xAxis = new XAxis();
+        xAxis.setCategories(xAxisCategories.toArray(new String[]{}));
+        xAxis.setTitle(xAxisLabel);
+        chartConfiguration.addxAxis(xAxis);
+
+        var yAxis = new YAxis();
+        yAxis.setMin(0);
+        yAxis.setTitle(new AxisTitle(yAxisLabel));
+        chartConfiguration.addyAxis(yAxis);
+
+        var tooltip = new Tooltip();
+        tooltip.setFormatter("function() { return '' + this.series.name + ': ' + this.y + ' (' + Math.round(this.percentage) + '%)'; }");
+        chartConfiguration.setTooltip(tooltip);
+
+        var plotOptions = new PlotOptionsColumn();
+        plotOptions.setStacking(Stacking.PERCENT);
+        chartConfiguration.setPlotOptions(plotOptions);
+
+        return chart;
+    }
+
 }
