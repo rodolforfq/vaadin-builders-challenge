@@ -25,18 +25,18 @@ public class DiningSection extends Section {
     private Component createDiningWidget() {
         return ChartFactory.createSolidGauge("Dining",
                 "The number of meals reserved vs. number possible",
-                50,100);
+                diningMetrics.mealsReservedCount(), diningMetrics.mealsPossibleCount());
     }
 
     private Component createPreferencesWidget() {
         return ChartFactory.createSolidGauge("Preferences",
                 "The number of diners with food preferences vs. total diners",
-                50, 100);
+                diningMetrics.foodPreferenceCount(), diningMetrics.dinerCount());
     }
 
     private Component createRestrictionsWidget() {
         return ChartFactory.createSolidGauge("Restrictions",
                 "The number of diners with food restrictions vs. total diners",
-                50, 100);
+                diningMetrics.foodRestrictionCount(), diningMetrics.dinerCount());
     }
 }

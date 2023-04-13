@@ -1,25 +1,15 @@
 package com.vaadin.builderschallenge.views.dashboard;
 
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.*;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.theme.lumo.LumoUtility;
+
 import java.util.Arrays;
 import java.util.Collection;
-
-import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.charts.model.AxisTitle;
-import com.vaadin.flow.component.charts.model.Background;
-import com.vaadin.flow.component.charts.model.BackgroundShape;
-import com.vaadin.flow.component.charts.model.ChartType;
-import com.vaadin.flow.component.charts.model.DataLabels;
-import com.vaadin.flow.component.charts.model.DataSeries;
-import com.vaadin.flow.component.charts.model.DataSeriesItem;
-import com.vaadin.flow.component.charts.model.ListSeries;
-import com.vaadin.flow.component.charts.model.PlotOptionsColumn;
-import com.vaadin.flow.component.charts.model.PlotOptionsPie;
-import com.vaadin.flow.component.charts.model.PlotOptionsSolidgauge;
-import com.vaadin.flow.component.charts.model.Stacking;
-import com.vaadin.flow.component.charts.model.Tooltip;
-import com.vaadin.flow.component.charts.model.XAxis;
-import com.vaadin.flow.component.charts.model.YAxis;
-import com.vaadin.flow.component.charts.model.style.SolidColor;
 
 public final class ChartFactory {
 
@@ -28,21 +18,32 @@ public final class ChartFactory {
     }
 
 
+    public static Component createNumber(String title, String subtitle, int value) {
+        var titleSpan = new Span(title);
+        titleSpan.addClassNames(LumoUtility.FontSize.LARGE);
+
+        var subtitleSpan = new Span(subtitle);
+        subtitleSpan.addClassNames(LumoUtility.FontSize.XSMALL,
+                LumoUtility.FontWeight.LIGHT,
+                LumoUtility.TextAlignment.CENTER);
+
+        var numberSpan = new Span(Integer.toString(value));
+        numberSpan.addClassNames(LumoUtility.FontWeight.EXTRABOLD,
+                LumoUtility.TextColor.PRIMARY);
+        numberSpan.getStyle().set("font-size", "120px");
+
+        var layout = new VerticalLayout();
+        layout.setAlignItems(FlexComponent.Alignment.CENTER);
+        layout.add(titleSpan);
+        layout.add(subtitleSpan);
+        layout.add(numberSpan);
+
+        return layout;
+    }
+
+
     public static Chart createSolidGauge(String title, String subtitle, int count, int total) {
         var chart = new Chart(ChartType.SOLIDGAUGE);
-
-        var chartConfiguration = chart.getConfiguration();
-        chartConfiguration.setTitle(title);
-        chartConfiguration.setSubTitle(subtitle);
-
-        var background = new Background();
-        background.setShape(BackgroundShape.ARC);
-        background.setInnerRadius("85%");
-
-        var pane = chartConfiguration.getPane();
-        pane.setStartAngle(-135);
-        pane.setEndAngle(135);
-        pane.setBackground(background);
 
         var yaxis = new YAxis();
 //        yaxis.setTitle("Y-Axis");
@@ -52,25 +53,34 @@ public final class ChartFactory {
         yaxis.setMin(0);
         yaxis.setMax(total);
         // Configure ticks and labels
-        yaxis.setTickInterval(total);  // At 0, 100, and 200
+        yaxis.setTickInterval(total);
         yaxis.setMinorTickInterval("null");
-//        yaxis.getLabels().setY(-16); // Move 16 px upwards
         yaxis.setGridLineWidth(0); // Disable grid
 
-        chartConfiguration.addyAxis(yaxis);
-
-        var options = new PlotOptionsSolidgauge();
+        var series = new ListSeries(count);
 
         // Move the value display box at the center a bit higher
         var dataLabels = new DataLabels();
         dataLabels.setY(-20);
+
+        var options = new PlotOptionsSolidgauge();
         options.setDataLabels(dataLabels);
 
+        var chartConfiguration = chart.getConfiguration();
+        chartConfiguration.setTitle(title);
+        chartConfiguration.setSubTitle(subtitle);
+        chartConfiguration.addyAxis(yaxis);
+        chartConfiguration.addSeries(series);
         chartConfiguration.setPlotOptions(options);
 
-        var series = new ListSeries(count);
-        chartConfiguration.addSeries(series);
-//        series.setyAxis(yaxis);
+        var background = new Background();
+        background.setShape(BackgroundShape.ARC);
+        background.setInnerRadius("60%");
+
+        var pane = chartConfiguration.getPane();
+        pane.setStartAngle(-135);
+        pane.setEndAngle(135);
+        pane.setBackground(background);
 
         return chart;
     }
@@ -83,8 +93,7 @@ public final class ChartFactory {
 
         var options = new PlotOptionsPie();
         options.setInnerSize("50%");
-        options.setSize("65%");  // Default
-        options.setCenter("50%", "50%"); // Default
+        options.setSize("65%");
 
         var series = new DataSeries();
         Arrays.stream(pieSlices)
@@ -98,6 +107,12 @@ public final class ChartFactory {
         chartConfiguration.addSeries(series);
 
         return chart;
+    }
+
+    public static record PieSlice(
+            String label,
+            int value
+    ) {
     }
 
     public static Chart createStackedPercentageColumn(String title, String subtitle, String xAxisLabel, String yAxisLabel,
@@ -128,11 +143,4 @@ public final class ChartFactory {
 
         return chart;
     }
-
-    public static record PieSlice(
-            String label,
-            int value
-    ) {
-    }
-    
 }
