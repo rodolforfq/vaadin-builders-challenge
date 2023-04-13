@@ -3,7 +3,6 @@ package com.vaadin.builderschallenge.views.dashboard;
 import com.vaadin.builderschallenge.services.DashboardService;
 import com.vaadin.builderschallenge.uimodel.HackathonMetrics;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,20 +17,26 @@ public class HackathonSection extends Section {
         hackathonMetrics = dashboardService.fetchHackathonMetrics();
         LOG.info("HackathonMetrics: {}", hackathonMetrics);
 
-        addTile("Ideas", createIdeasWidget());
-        addTile("Popularity", createPopularityWidget());
-        addTile("Registrants", createRegistrantsWidget());
+        addTile(createIdeasWidget());
+        addTile(createPopularityWidget());
+        addTile(createRegistrantsWidget());
     }
 
     private Component createIdeasWidget() {
-        return new Text("A single number showing the number of hackathon ideas");
+        return ChartFactory.createNumber("Ideas",
+                "The number of hackathon ideas",
+                hackathonMetrics.ideaCount());
     }
 
     private Component createPopularityWidget() {
-        return new Text("A single number showing the number of hackathon upvotes");
+        return ChartFactory.createNumber("Popularity",
+                "The number of hackathon upvotes",
+                hackathonMetrics.upvoteCount());
     }
 
     private Component createRegistrantsWidget() {
-        return new Text("A single number showing the number of hackathon registrants");
+        return ChartFactory.createNumber("Registrants",
+                "The number of hackathon registrants",
+                hackathonMetrics.registrantCount());
     }
 }

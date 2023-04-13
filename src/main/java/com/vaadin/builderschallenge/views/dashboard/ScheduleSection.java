@@ -3,7 +3,6 @@ package com.vaadin.builderschallenge.views.dashboard;
 import com.vaadin.builderschallenge.services.DashboardService;
 import com.vaadin.builderschallenge.uimodel.ScheduleMetrics;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +17,12 @@ public class ScheduleSection extends Section {
         scheduleMetrics = dashboardService.fetchScheduleMetrics();
         LOG.info("ScheduleMetrics: {}", scheduleMetrics);
 
-        addTile("Events", createEventsWidget());
+        addTile(createEventsWidget());
     }
 
     private Component createEventsWidget() {
-        return new Text("A single number showing the number of scheduled calendar events");
+        return ChartFactory.createNumber("Events",
+                "The number of scheduled calendar events",
+                scheduleMetrics.eventCount());
     }
 }

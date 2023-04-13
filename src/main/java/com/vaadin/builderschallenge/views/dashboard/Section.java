@@ -30,6 +30,7 @@ public class Section extends Composite<VerticalLayout> {
         return title;
     }
 
+    @Deprecated(forRemoval = true)
     public Tile addTile(String label, Component widget) {
         var tile = new Tile(label, widget);
         tileLayout.add(tile);
