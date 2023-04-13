@@ -73,14 +73,26 @@ public final class ChartFactory {
     }
 
 
-    public static Chart createPie(String title, String subtitle, int... sliceSizes) {
-        var total = Arrays.stream(sliceSizes).sum();
+    public static Chart createPie(String title, String subtitle, PieSlice... pieSlices) {
+//        var total = Arrays.stream(pieSlices).map(PieSlice::value).reduce(0, Integer::sum);
 
         var chart = new Chart(ChartType.PIE);
+
+        var options = new PlotOptionsPie();
+        options.setInnerSize("50%");
+        options.setSize("65%");  // Default
+        options.setCenter("50%", "50%"); // Default
+
+        var series = new DataSeries();
+        Arrays.stream(pieSlices)
+                .map(pieSlice -> new DataSeriesItem(pieSlice.label(), pieSlice.value()))
+                .forEach(series::add);
 
         var chartConfiguration = chart.getConfiguration();
         chartConfiguration.setTitle(title);
         chartConfiguration.setSubTitle(subtitle);
+        chartConfiguration.setPlotOptions(options);
+        chartConfiguration.addSeries(series);
 
         return chart;
     }
@@ -114,4 +126,10 @@ public final class ChartFactory {
         return chart;
     }
 
+    public static record PieSlice(
+            String label,
+            int value
+    ) {
+    }
+    
 }
