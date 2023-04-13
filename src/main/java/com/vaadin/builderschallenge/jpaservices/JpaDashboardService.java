@@ -52,10 +52,10 @@ public class JpaDashboardService implements DashboardService {
                         new TopicGroupedQuestions("Investors", 1)
                 ),
                 List.of(
-                        new TopicVotes("Products", 8),
-                        new TopicVotes("Research", 3),
-                        new TopicVotes("Financials", 9),
-                        new TopicVotes("Investors", 1)
+                        new TopicVotes("Products", 88),
+                        new TopicVotes("Research", 57),
+                        new TopicVotes("Financials", 21),
+                        new TopicVotes("Investors", 3)
                 ));
     }
 }
